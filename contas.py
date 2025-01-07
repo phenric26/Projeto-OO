@@ -50,12 +50,5 @@ class ContaCorrente(Conta):
         limite_maximo = -self.limite
     
     
-        if valor_pos_saque >= 0:
-            self.saldo -= valor
-            self.saldo_conta(f'(SAQUE {valor})')
-            return self.saldo
-        
-        
-        print('Nao foi possivel sacar o valor desejado')
-        self.saldo_conta(f'SAQUE NEGADO {valor}')
+    
         
