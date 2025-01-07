@@ -1,0 +1,45 @@
+# Serialização para TXT
+    def salvar_em_txt(self, arquivo):
+        with open(arquivo, 'w') as f:
+            f.write(self.to_txt())
+        print(f"Dados salvos em {arquivo}.")
+
+    def carregar_de_txt(self, arquivo):
+        try:
+            with open(arquivo, 'r') as f:
+                linhas = f.readlines()
+            self.from_txt(linhas)
+            print(f"Dados carregados de {arquivo}.")
+        except FileNotFoundError:
+            print(f"Arquivo {arquivo} não encontrado.")
+
+    # Representação para serialização
+    def to_dict(self):
+        return {
+            "agencias": self.agencias,
+            "clientes": [str(cliente) for cliente in self.clientes],  # Presume que cliente tem método __str__
+            "contas": [conta.to_dict() for conta in self.contas]  # Presume que conta tem método to_dict
+        }
+
+    def from_dict(self, data):
+        self.agencias = data["agencias"]
+        self.clientes = data["clientes"]  # Carrega os clientes (substitua pela classe apropriada se necessário)
+        self.contas = [ContaCorrente(**conta) if conta["tipo"] == "corrente"
+                       else ContaPoupanca(**conta) for conta in data["contas"]]
+
+    def to_txt(self):
+        resultado = []
+        resultado.append(f"Agências: {', '.join(map(str, self.agencias))}")
+        resultado.append("Clientes:")
+        for cliente in self.clientes:
+            resultado.append(f"  - {cliente}")  # Presume que cliente tem método __str__
+        resultado.append("Contas:")
+        for conta in self.contas:
+            resultado.append(f"  - {conta}")  # Presume que conta tem método __repr__
+        return "\n".join(resultado)
+
+    def from_txt(self, linhas):
+        # Deserializar a partir de TXT é mais manual. Substitua pela lógica necessária.
+        pass
+        
+    
