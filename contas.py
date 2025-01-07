@@ -1,13 +1,13 @@
-import abc
+from abc import ABC, abstractmethod
 
 
-class Conta(abc.ABC):
+class Conta(ABC):
     def __init__(self, conta, saldo):
         self.conta = conta
         self.saldo = saldo
         
         
-    @abc.abstractmethod   
+    @abstractmethod   
     def sacar(self, valor):
         pass
         
