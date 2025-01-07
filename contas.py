@@ -13,10 +13,7 @@ class Conta(abc.ABC):
         
     def depositar(self, valor):
         self.saldo += valor
-        self.saldo_conta(f'(DEPOSITO {valor})')
-        
-    def saldo_conta(self, msg = ''):
-        print(f"O seu saldo é {self.saldo:.2f} {msg}")
+       
         
     def __repr__(self):
         class_name = type(self).__name__
