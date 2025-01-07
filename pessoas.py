@@ -21,7 +21,7 @@ class Pessoa:
     
     @senha.setter
     def senha(self, senha):
-        self._idade = senha
+        self._senha = senha
         
     def __repr__(self):
         class_name = type(self).__name__

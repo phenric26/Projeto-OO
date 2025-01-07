@@ -22,6 +22,7 @@ class Banco:
 
 banco = Banco()
 
+
 def inicio():
     print("=== Sistema Bancário ===")
     opcao = input("Já possui conta? Y/N - ")
@@ -79,20 +80,18 @@ def criar_cliente():
     senha = input("Digite sua senha: ")
     cliente = pessoas.Cliente(nome, senha)
     numero_conta_corrente = int(input("Digite um numero de conta corrente: ")) 
-    saldo_inicial_corrente = 0.0  
-    conta_corrente = contas.ContaCorrente(numero_conta_corrente, saldo_inicial_corrente)
-    
-    cliente.conta_corrente = conta_corrente
+    conta_corrente = contas.ContaCorrente(numero_conta_corrente)
     
     cliente.conta = conta_corrente  
     banco.clientes.append(cliente)
-    banco.contas.append(conta_corrente)
+    banco.contas.append(cliente.conta)
     
     print(f"Cliente {nome} criado com sucesso com a Conta Corrente número {numero_conta_corrente}!")
     return cliente  
 
 def criar_conta_poupanca(cliente):
     os.system("clear")
+    
     if cliente.conta:
         print("Cliente já possui uma conta!")
         return
@@ -108,12 +107,13 @@ def criar_conta_poupanca(cliente):
 def deposito(cliente):
     os.system("clear")
     
-    numero_conta = input("Digite o número da conta: ")
+    numero_conta = int(input("Digite o número da conta: "))
     conta = next((c for c in banco.contas if c.conta == numero_conta), None)
 
     if not conta:
         print("Conta não encontrada!")
         return
+    
     valor = float(input("Digite o valor do depósito: "))
     cliente.conta.depositar(valor)
     
@@ -123,12 +123,13 @@ def deposito(cliente):
 def saque(cliente):
     os.system("clear")
     
-    numero_conta = input("Digite o número da conta: ")
+    numero_conta = int(input("Digite o número da conta: "))
     conta = next((c for c in banco.contas if c.conta == numero_conta), None)
 
     if not conta:
         print("Conta não encontrada!")
         return
+    
     valor = float(input("Digite o valor do saque: "))
     if valor > cliente.conta.saldo:
         print("Saldo insuficiente.")

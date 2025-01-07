@@ -47,7 +47,11 @@ class ContaCorrente(Conta):
     
     def sacar(self, valor):
         valor_pos_saque = self.saldo - valor
-        limite_maximo = -self.limite
+        
+        if valor_pos_saque >= 0:
+            self.saldo -= valor
+            return self.saldo
+            
     
     
     
