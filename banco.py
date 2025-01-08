@@ -214,7 +214,6 @@ def transferir(cliente_origem, numero_conta_origem, numero_conta_destino, valor)
         print("Valor inválido para transferência.")
         return
 
-    # Busca a conta de origem do cliente
     conta_origem = next((c for c in cliente_origem.contas if c.numero_conta == numero_conta_origem), None)
 
     if not conta_origem:
@@ -225,18 +224,17 @@ def transferir(cliente_origem, numero_conta_origem, numero_conta_destino, valor)
         print("Saldo insuficiente para transferência.")
         return
 
-    # Busca a conta de destino no banco
     conta_destino = next((c for c in banco.contas if c.numero_conta == numero_conta_destino), None)
 
     if not conta_destino:
         print("Conta destino não encontrada.")
         return
 
-    # Realiza a transferência
-    if conta_origem.sacar(valor):  # Saca da conta de origem
-        conta_destino.depositar(valor)  # Deposita na conta de destino
+   
+    if conta_origem.sacar(valor):  
+        conta_destino.depositar(valor) 
         print(f"Transferência de R${valor:.2f} realizada com sucesso!")
-        salvar_dados()  # Salva os dados no arquivo
+        salvar_dados() 
     else:
         print("Não foi possível realizar a transferência.")
     
