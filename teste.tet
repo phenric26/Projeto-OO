@@ -1,45 +1,32 @@
-# Serialização para TXT
-    def salvar_em_txt(self, arquivo):
-        with open(arquivo, 'w') as f:
-            f.write(self.to_txt())
-        print(f"Dados salvos em {arquivo}.")
+def transferir(cliente_origem, numero_conta_origem, numero_conta_destino, valor):
+    os.system("clear")
 
-    def carregar_de_txt(self, arquivo):
-        try:
-            with open(arquivo, 'r') as f:
-                linhas = f.readlines()
-            self.from_txt(linhas)
-            print(f"Dados carregados de {arquivo}.")
-        except FileNotFoundError:
-            print(f"Arquivo {arquivo} não encontrado.")
+    if valor <= 0:
+        print("Valor inválido para transferência.")
+        return
 
-    # Representação para serialização
-    def to_dict(self):
-        return {
-            "agencias": self.agencias,
-            "clientes": [str(cliente) for cliente in self.clientes],  # Presume que cliente tem método __str__
-            "contas": [conta.to_dict() for conta in self.contas]  # Presume que conta tem método to_dict
-        }
+    # Busca a conta de origem do cliente
+    conta_origem = next((c for c in cliente_origem.contas if c.numero_conta == numero_conta_origem), None)
 
-    def from_dict(self, data):
-        self.agencias = data["agencias"]
-        self.clientes = data["clientes"]  # Carrega os clientes (substitua pela classe apropriada se necessário)
-        self.contas = [ContaCorrente(**conta) if conta["tipo"] == "corrente"
-                       else ContaPoupanca(**conta) for conta in data["contas"]]
+    if not conta_origem:
+        print("Conta de origem não encontrada para o cliente.")
+        return
 
-    def to_txt(self):
-        resultado = []
-        resultado.append(f"Agências: {', '.join(map(str, self.agencias))}")
-        resultado.append("Clientes:")
-        for cliente in self.clientes:
-            resultado.append(f"  - {cliente}")  # Presume que cliente tem método __str__
-        resultado.append("Contas:")
-        for conta in self.contas:
-            resultado.append(f"  - {conta}")  # Presume que conta tem método __repr__
-        return "\n".join(resultado)
+    if valor > conta_origem.saldo:
+        print("Saldo insuficiente para transferência.")
+        return
 
-    def from_txt(self, linhas):
-        # Deserializar a partir de TXT é mais manual. Substitua pela lógica necessária.
-        pass
-        
-    
+    # Busca a conta de destino no banco
+    conta_destino = next((c for c in banco.contas if c.numero_conta == numero_conta_destino), None)
+
+    if not conta_destino:
+        print("Conta destino não encontrada.")
+        return
+
+    # Realiza a transferência
+    if conta_origem.sacar(valor):  # Saca da conta de origem
+        conta_destino.depositar(valor)  # Deposita na conta de destino
+        print(f"Transferência de R${valor:.2f} realizada com sucesso!")
+        salvar_dados()  # Salva os dados no arquivo
+    else:
+        print("Não foi possível realizar a transferência.")
