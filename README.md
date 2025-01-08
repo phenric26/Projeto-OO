@@ -2,6 +2,24 @@ Sistema Bancário
 
 Este é um sistema bancário simples desenvolvido em Python, utilizando programação orientada a objetos (POO), com o objetivo de gerenciar clientes e contas bancárias. O sistema permite criar contas correntes e contas poupança, realizar depósitos e saques, além de autenticar clientes com base no nome e na senha.
 
+Como Utilizar
+
+    Iniciar o sistema:
+        O sistema pode ser iniciado executando o script principal(Banco.py). Ele carregará os dados salvos no arquivo dados_banco.json ou criará um novo arquivo se não houver dados existentes.
+
+    Cadastrar um novo cliente:
+        Ao iniciar o sistema, o cliente será solicitado a informar se já possui uma conta ou se deseja criar uma nova conta. Caso escolha criar uma nova conta, ele deverá fornecer seu nome, senha e número da conta.
+
+    Autenticar-se no sistema:
+        Para clientes existentes, será necessário fornecer o nome e a senha para autenticação. Se a autenticação for bem-sucedida, o cliente poderá acessar o menu de operações bancárias.
+
+    Operações bancárias:
+        O cliente pode escolher entre as opções do menu: criar uma nova conta poupança, realizar um depósito ou um saque.
+
+    Salvar dados:
+        As alterações realizadas nas contas e clientes serão salvas automaticamente no arquivo dados_banco.json ao final de cada sessão.
+
+
 Funcionalidades
 
     Cadastro de clientes:
@@ -76,20 +94,3 @@ A classe Pessoa é uma classe base que contém os atributos comuns a todas as pe
     Atributos:
         nome: Nome da pessoa.
         senha: Senha da pessoa.
-
-Como Utilizar
-
-    Iniciar o sistema:
-        O sistema pode ser iniciado executando o script principal(Banco.py). Ele carregará os dados salvos no arquivo dados_banco.json ou criará um novo arquivo se não houver dados existentes.
-
-    Cadastrar um novo cliente:
-        Ao iniciar o sistema, o cliente será solicitado a informar se já possui uma conta ou se deseja criar uma nova conta. Caso escolha criar uma nova conta, ele deverá fornecer seu nome, senha e número da conta.
-
-    Autenticar-se no sistema:
-        Para clientes existentes, será necessário fornecer o nome e a senha para autenticação. Se a autenticação for bem-sucedida, o cliente poderá acessar o menu de operações bancárias.
-
-    Operações bancárias:
-        O cliente pode escolher entre as opções do menu: criar uma nova conta poupança, realizar um depósito ou um saque.
-
-    Salvar dados:
-        As alterações realizadas nas contas e clientes serão salvas automaticamente no arquivo dados_banco.json ao final de cada sessão.
