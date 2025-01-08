@@ -24,12 +24,6 @@ class Pessoa:
     def senha(self, senha):
         self._senha = senha
         
-    def __repr__(self):
-        class_name = type(self).__name__
-        attrs = f'({self.nome!r}, {self.senha!r})'
-        return f'{class_name}{attrs}' 
-        
-
 class Cliente(Pessoa):
     def __init__(self, nome, senha):
         super().__init__(nome, senha)

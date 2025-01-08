@@ -5,24 +5,14 @@ class Conta(ABC):
     def __init__(self, conta, saldo):
         self.numero_conta = conta
         self.saldo = saldo
-        
-        
+
+    
     @abstractmethod   
     def sacar(self, valor):
         pass
         
     def depositar(self, valor):
-        self.saldo += valor
-       
-        
-    def __repr__(self):
-        class_name = type(self).__name__
-        attrs = f'({self.agencia!r}, {self.conta!r}, {self.saldo!r})'
-        return f'{class_name}{attrs}' 
-        
-
-        
-        
+        self.saldo += valor 
         
 class ContaPoupanca(Conta):
     
