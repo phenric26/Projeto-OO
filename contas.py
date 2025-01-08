@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class Conta(ABC):
     def __init__(self, conta, saldo):
-        self.conta = conta
+        self.numero_conta = conta
         self.saldo = saldo
         
         
@@ -32,25 +32,30 @@ class ContaPoupanca(Conta):
     
         if valor_pos_saque >= 0:
             self.saldo -= valor
-            self.saldo_conta(f'(SAQUE {valor})')
-            return self.saldo
-        
-        print('Nao foi possivel sacar o valor desejado')
-        self.saldo_conta(f'SAQUE NEGADO {valor}')
+            print(f"Saque de R${valor:.2f} realizado com sucesso! Saldo atual: R${self.saldo:.2f}")
+            return True 
         
         
 class ContaCorrente(Conta):
     
-    def __init__(self, conta, saldo = 0):
-        super().__init__(conta, saldo)
+    def __init__(self, numero_conta, saldo = 0):
+        super().__init__(numero_conta, saldo)
        
     
-    def sacar(self, valor):
+    def sacar(self, valor, limite = 1000):
+        self.limite = limite
         valor_pos_saque = self.saldo - valor
+    
         
-        if valor_pos_saque >= 0:
+        if valor > limite:
+            print("Saque maior que o limite de R$ 1000,00")
+            return False
+        elif valor_pos_saque >= 0:
             self.saldo -= valor
-            return self.saldo
+            print(f"Saque de R${valor:.2f} realizado com sucesso! Saldo atual: R${self.saldo:.2f}")
+            return True 
+        
+        
             
     
     
