@@ -5,8 +5,8 @@ class Conta(ABC):
     def __init__(self, conta, saldo):
         self.numero_conta = conta
         self.saldo = saldo
-        
-        
+
+    
     @abstractmethod   
     def sacar(self, valor):
         pass
