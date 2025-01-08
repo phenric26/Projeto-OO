@@ -1,6 +1,7 @@
 Sistema Bancário
 
 Este é um sistema bancário simples desenvolvido em Python, utilizando programação orientada a objetos (POO), com o objetivo de gerenciar clientes e contas bancárias. O sistema permite criar contas correntes e contas poupança, realizar depósitos e saques, além de autenticar clientes com base no nome e na senha.
+
 Funcionalidades
 
     Cadastro de clientes:
