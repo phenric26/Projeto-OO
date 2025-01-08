@@ -95,7 +95,8 @@ def menu(cliente):
         print("\n1. Criar Conta Poupança")
         print("2. Depósito")
         print("3. Saque")
-        print("4. Sair")
+        print("4. Transferir")
+        print("5. Sair")
         
         opcao = input("Escolha uma opção: ")
         
@@ -106,6 +107,12 @@ def menu(cliente):
         elif opcao == "3":
             saque(cliente)
         elif opcao == "4":
+            os.system("clear")
+            numero_conta_origem = int(input("Digite o número da conta origem: "))
+            numero_conta_destino = int(input("Digite o número da conta destino: "))
+            valor = float(input("Digite o valor da transferência: "))
+            transferir(cliente, numero_conta_origem, numero_conta_destino, valor)
+        elif opcao == "5":
             print("Saindo...")
             salvar_dados()
             break
@@ -199,6 +206,39 @@ def saque(cliente):
         
     else:
         print("Tente novamente!")
+        
+def transferir(cliente_origem, numero_conta_origem, numero_conta_destino, valor):
+    os.system("clear")
+
+    if valor <= 0:
+        print("Valor inválido para transferência.")
+        return
+
+    # Busca a conta de origem do cliente
+    conta_origem = next((c for c in cliente_origem.contas if c.numero_conta == numero_conta_origem), None)
+
+    if not conta_origem:
+        print("Conta de origem não encontrada para o cliente.")
+        return
+
+    if valor > conta_origem.saldo:
+        print("Saldo insuficiente para transferência.")
+        return
+
+    # Busca a conta de destino no banco
+    conta_destino = next((c for c in banco.contas if c.numero_conta == numero_conta_destino), None)
+
+    if not conta_destino:
+        print("Conta destino não encontrada.")
+        return
+
+    # Realiza a transferência
+    if conta_origem.sacar(valor):  # Saca da conta de origem
+        conta_destino.depositar(valor)  # Deposita na conta de destino
+        print(f"Transferência de R${valor:.2f} realizada com sucesso!")
+        salvar_dados()  # Salva os dados no arquivo
+    else:
+        print("Não foi possível realizar a transferência.")
     
 
     
