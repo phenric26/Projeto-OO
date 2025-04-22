@@ -270,3 +270,4 @@ def salvar_dados():
     
 if __name__ == "__main__":
     inicio()
+    print("COmecamndo ...")
