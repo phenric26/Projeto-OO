@@ -95,7 +95,7 @@ def menu(cliente):
         print("\n1. Criar Conta Poupança")
         print("2. Depósito")
         print("3. Saque")
-        print("4. Transferir")
+        print("4. Transferência")
         print("5. Sair")
         
         opcao = input("Escolha uma opção: ")
@@ -270,5 +270,3 @@ def salvar_dados():
     
 if __name__ == "__main__":
     inicio()
-    print("COmecamndo ...")
-    print("Teste revert..")
